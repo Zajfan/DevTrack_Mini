@@ -1,0 +1,8 @@
+C:/Users/info/Documents/DevTrack_Mini/build/DevTrack-RelWithDebInfo/CMakeFiles/DevTrack_Mini.dir
+C:/Users/info/Documents/DevTrack_Mini/build/DevTrack-RelWithDebInfo/CMakeFiles/edit_cache.dir
+C:/Users/info/Documents/DevTrack_Mini/build/DevTrack-RelWithDebInfo/CMakeFiles/rebuild_cache.dir
+C:/Users/info/Documents/DevTrack_Mini/build/DevTrack-RelWithDebInfo/CMakeFiles/list_install_components.dir
+C:/Users/info/Documents/DevTrack_Mini/build/DevTrack-RelWithDebInfo/CMakeFiles/install.dir
+C:/Users/info/Documents/DevTrack_Mini/build/DevTrack-RelWithDebInfo/CMakeFiles/install/local.dir
+C:/Users/info/Documents/DevTrack_Mini/build/DevTrack-RelWithDebInfo/CMakeFiles/DevTrack_Mini_autogen_timestamp_deps.dir
+C:/Users/info/Documents/DevTrack_Mini/build/DevTrack-RelWithDebInfo/CMakeFiles/DevTrack_Mini_autogen.dir

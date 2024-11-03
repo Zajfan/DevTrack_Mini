@@ -2,6 +2,7 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 #include "newprojectdialog.h"
+#include "overviewdetails.h"
 #include <QFileDialog>
 #include <QSettings>
 #include <QMessageBox>
@@ -12,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
 
     // Connect menu items to slots
     connect(ui->actionOpen_Project, &QAction::triggered, this, &MainWindow::on_actionOpen_Project_triggered);
@@ -28,6 +30,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     // Connect tab widget signal to slot
     connect(ui->tabWidget, &QTabWidget::tabBarClicked, this, &MainWindow::on_tabWidget_tabBarClicked);
+
+    // Add the OverviewDetails tab in the constructor
+    ui->tabWidget->addTab(new OverviewDetails(), "Overview");
 
     // Set central widget
     setCentralWidget(ui->centralwidget);
@@ -155,7 +160,12 @@ void MainWindow::on_actionExit_triggered() {
 }
 
 void MainWindow::on_tabWidget_tabBarClicked(int index) {
-    // Open project details in a new tab
+    // Check if the clicked tab is the "Overview" tab
+    if (ui->tabWidget->tabText(index) == "Overview") {
+        return; // Do nothing if it's the Overview tab
+    }
+
+    // For other tabs, open project details in a new tab (as before)
     QString projectName = ui->tabWidget->tabText(index);
     QWidget *projectDetails = new QWidget();
     ui->tabWidget->addTab(projectDetails, projectName + " Details");
