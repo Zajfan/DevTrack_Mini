@@ -1,4 +1,5 @@
 C:/Users/info/Documents/DevTrack_Mini/build/DevTrack-RelWithDebInfo/DevTrack_Mini_autogen/EWIEGA46WW/moc_mainwindow.cpp: C:/Users/info/Documents/DevTrack_Mini/mainwindow.h \
+  C:/Qt/6.8.0/msvc2022_64/include/QtCore/QMap \
   C:/Qt/6.8.0/msvc2022_64/include/QtCore/q20functional.h \
   C:/Qt/6.8.0/msvc2022_64/include/QtCore/q20iterator.h \
   C:/Qt/6.8.0/msvc2022_64/include/QtCore/q20memory.h \

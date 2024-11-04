@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QMap> // Include QMap for storing project details
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -10,7 +11,6 @@ QT_END_NAMESPACE
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
-
 
 public:
     MainWindow(QWidget *parent = nullptr);
@@ -31,8 +31,10 @@ private slots:
     void on_actionPreferences_triggered();
     void on_actionExit_triggered();
     void on_tabWidget_tabBarClicked(int index);
+    void onAddNewProjectButtonClicked(); // New slot for Add Project
 
 private:
     Ui::MainWindow *ui;
+    QMap<QString, QPair<QString, QString>> projectDetails; // Add this member variable
 };
 #endif // MAINWINDOW_H

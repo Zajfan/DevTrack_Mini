@@ -2,6 +2,7 @@
 C:/Users/info/Documents/DevTrack_Mini/constants.h
 C:/Users/info/Documents/DevTrack_Mini/mainwindow.h
  mmc:Q_OBJECT
+ mdp:C:/Qt/6.8.0/msvc2022_64/include/QtCore/QMap
  mdp:C:/Qt/6.8.0/msvc2022_64/include/QtCore/q20functional.h
  mdp:C:/Qt/6.8.0/msvc2022_64/include/QtCore/q20iterator.h
  mdp:C:/Qt/6.8.0/msvc2022_64/include/QtCore/q20memory.h
