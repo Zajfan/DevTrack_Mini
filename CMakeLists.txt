@@ -25,8 +25,6 @@ set(PROJECT_SOURCES
     newprojectdialog.h
     newprojectdialog.cpp
     newprojectdialog.ui
-    overviewdetails.h
-    overviewdetails.cpp
 )
 
 # Add executable or library based on Qt version and platform

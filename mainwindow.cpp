@@ -2,7 +2,6 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 #include "newprojectdialog.h"
-#include "overviewdetails.h"
 #include <QFileDialog>
 #include <QSettings>
 #include <QMessageBox>
@@ -30,9 +29,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     // Connect tab widget signal to slot
     connect(ui->tabWidget, &QTabWidget::tabBarClicked, this, &MainWindow::on_tabWidget_tabBarClicked);
-
-    // Add the OverviewDetails tab in the constructor
-    ui->tabWidget->addTab(new OverviewDetails(), "Overview");
 
     // Set central widget
     setCentralWidget(ui->centralwidget);
