@@ -7,6 +7,7 @@
 #include <QMessageBox>
 #include <QDebug>
 #include <QMap>
+#include <QTreeWidgetItem>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -14,10 +15,9 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-
-    // Connect menu items to slots
-    connect(ui->actionOpen_Project, &QAction::triggered, this, &MainWindow::on_actionOpen_Project_triggered);
-    connect(ui->actionNew_Project, &QAction::triggered, this, &MainWindow::on_actionNew_Project_triggered);
+    connect(ui->actionOpen_Project,
+        &QAction::triggered, this, &MainWindow::on_actionOpen_Project_triggered);
+        connect(ui->actionNew_Project, &QAction::triggered, this, &MainWindow::on_actionNew_Project_triggered);
     connect(ui->actionSave_Project_2, &QAction::triggered, this, &MainWindow::on_actionSave_Project_triggered);
     connect(ui->actionSave_Project_As, &QAction::triggered, this, &MainWindow::on_actionSave_Project_As_triggered);
     connect(ui->actionClose_Project, &QAction::triggered, this, &MainWindow::on_actionClose_Project_triggered);
@@ -28,13 +28,15 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->actionPreferences_Settings, &QAction::triggered, this, &MainWindow::on_actionPreferences_triggered);
     connect(ui->actionExit, &QAction::triggered, this, &MainWindow::on_actionExit_triggered);
 
-    // Connect tab widget signal to slot
     connect(ui->tabWidget, &QTabWidget::tabBarClicked, this, &MainWindow::on_tabWidget_tabBarClicked);
 
-    // Connect the Add Project button
     connect(ui->button_AddProject, &QPushButton::clicked, this, &MainWindow::onAddNewProjectButtonClicked);
 
-    // Set central widget
+    // Add the root item to the tree widget
+    rootItem = new QTreeWidgetItem(ui->treeWidget_Projects);
+    rootItem->setText(0, "Projects");
+    ui->treeWidget_Projects->addTopLevelItem(rootItem);
+
     setCentralWidget(ui->centralwidget);
 }
 
@@ -161,8 +163,8 @@ void MainWindow::onAddNewProjectButtonClicked() {
         QString projectShortDescription = dialog.getProjectDescription();
         QString projectLongDescription = dialog.getProjectDesignDocument();
 
-        // Add project to tree widget
-        QTreeWidgetItem *projectItem = new QTreeWidgetItem(ui->treeWidget_Projects);
+        // Add project to tree widget (under the root item)
+        QTreeWidgetItem *projectItem = new QTreeWidgetItem(rootItem);
         projectItem->setText(0, projectName);
 
         // Store project details
