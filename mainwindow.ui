@@ -45,7 +45,7 @@
        </property>
       </column>
      </widget>
-     <widget class="QTableWidget" name="tableWidget">
+     <widget class="QTableWidget" name="tableWidget_ProjectInfo">
       <property name="geometry">
        <rect>
         <x>520</x>

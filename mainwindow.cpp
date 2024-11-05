@@ -8,6 +8,7 @@
 #include <QDebug>
 #include <QMap>
 #include <QTreeWidgetItem>
+#include <QTableWidgetItem>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -15,9 +16,8 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    connect(ui->actionOpen_Project,
-        &QAction::triggered, this, &MainWindow::on_actionOpen_Project_triggered);
-        connect(ui->actionNew_Project, &QAction::triggered, this, &MainWindow::on_actionNew_Project_triggered);
+    connect(ui->actionOpen_Project, &QAction::triggered, this, &MainWindow::on_actionOpen_Project_triggered);
+    connect(ui->actionNew_Project, &QAction::triggered, this, &MainWindow::on_actionNew_Project_triggered);
     connect(ui->actionSave_Project_2, &QAction::triggered, this, &MainWindow::on_actionSave_Project_triggered);
     connect(ui->actionSave_Project_As, &QAction::triggered, this, &MainWindow::on_actionSave_Project_As_triggered);
     connect(ui->actionClose_Project, &QAction::triggered, this, &MainWindow::on_actionClose_Project_triggered);
@@ -32,10 +32,11 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui->button_AddProject, &QPushButton::clicked, this, &MainWindow::onAddNewProjectButtonClicked);
 
-    // Add the root item to the tree widget
     rootItem = new QTreeWidgetItem(ui->treeWidget_Projects);
     rootItem->setText(0, "Projects");
     ui->treeWidget_Projects->addTopLevelItem(rootItem);
+
+    connect(ui->treeWidget_Projects, &QTreeWidget::itemSelectionChanged, this, &MainWindow::onTreeWidget_Projects_itemSelectionChanged);
 
     setCentralWidget(ui->centralwidget);
 }
@@ -163,11 +164,28 @@ void MainWindow::onAddNewProjectButtonClicked() {
         QString projectShortDescription = dialog.getProjectDescription();
         QString projectLongDescription = dialog.getProjectDesignDocument();
 
-        // Add project to tree widget (under the root item)
         QTreeWidgetItem *projectItem = new QTreeWidgetItem(rootItem);
         projectItem->setText(0, projectName);
 
-        // Store project details
         projectDetails[projectName] = {projectShortDescription, projectLongDescription};
+    }
+}
+
+void MainWindow::onTreeWidget_Projects_itemSelectionChanged()
+{
+    QList<QTreeWidgetItem*> selectedItems = ui->treeWidget_Projects->selectedItems();
+    if (!selectedItems.isEmpty()) {
+        QTreeWidgetItem* selectedItem = selectedItems.first();
+        QString projectName = selectedItem->text(0);
+
+        QPair<QString, QString> details = projectDetails.value(projectName);
+        QString shortDescription = details.first;
+        QString longDescription = details.second;
+
+        ui->tableWidget_ProjectInfo->setRowCount(1);
+        ui->tableWidget_ProjectInfo->setColumnCount(3);
+        ui->tableWidget_ProjectInfo->setItem(0, 0, new QTableWidgetItem(projectName));
+        ui->tableWidget_ProjectInfo->setItem(0, 1, new QTableWidgetItem(shortDescription));
+        ui->tableWidget_ProjectInfo->setItem(0, 2, new QTableWidgetItem(longDescription));
     }
 }

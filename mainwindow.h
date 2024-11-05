@@ -34,6 +34,7 @@ private slots:
     void on_actionExit_triggered();
     void on_tabWidget_tabBarClicked(int index);
     void onAddNewProjectButtonClicked();
+    void onTreeWidget_Projects_itemSelectionChanged();
 
 private:
     Ui::MainWindow *ui;
