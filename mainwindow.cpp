@@ -9,12 +9,16 @@
 #include <QMap>
 #include <QTreeWidgetItem>
 #include <QTableWidgetItem>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
+#include <QSplitter>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
 
     connect(ui->actionOpen_Project, &QAction::triggered, this, &MainWindow::on_actionOpen_Project_triggered);
     connect(ui->actionNew_Project, &QAction::triggered, this, &MainWindow::on_actionNew_Project_triggered);
@@ -38,7 +42,37 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui->treeWidget_Projects, &QTreeWidget::itemSelectionChanged, this, &MainWindow::onTreeWidget_Projects_itemSelectionChanged);
 
-    setCentralWidget(ui->centralwidget);
+    // 1. Set a layout for the central widget
+    QVBoxLayout *centralLayout = new QVBoxLayout(ui->centralwidget);
+
+    // 2. Add the tab widget to the central layout
+    centralLayout->addWidget(ui->tabWidget);
+
+    // 3. Set size policy for the tab widget
+    ui->tabWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+
+    // Overview tab layout (unchanged)
+    QHBoxLayout *mainLayout = new QHBoxLayout(ui->tab);
+    QVBoxLayout *treeLayout = new QVBoxLayout();
+    QHBoxLayout *tableLayout = new QHBoxLayout();
+
+    treeLayout->addWidget(ui->treeWidget_Projects);
+    treeLayout->addWidget(ui->button_AddProject);
+
+    tableLayout->addWidget(ui->tableWidget_ProjectInfo);
+
+    QSplitter *splitter = new QSplitter(Qt::Horizontal, ui->tab);
+    splitter->addWidget(new QWidget(splitter));
+    splitter->widget(0)->setLayout(treeLayout);
+    splitter->addWidget(new QWidget(splitter));
+    splitter->widget(1)->setLayout(tableLayout);
+
+    mainLayout->addWidget(splitter);
+
+    ui->treeWidget_Projects->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Expanding);
+    ui->tableWidget_ProjectInfo->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    // Set word wrap for table widget
+    ui->tableWidget_ProjectInfo->setWordWrap(true);
 }
 
 MainWindow::~MainWindow()
